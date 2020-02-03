@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using ChatBot.Bots;
 using ChatBot.Services;
+using ChatBot.Dialogs;
 
 namespace ChatBot
 {
@@ -35,9 +36,12 @@ namespace ChatBot
             
             // Configure State
             ConfigureState(services);
-            
+
+            // Configore Dialog
+            ConfigureDialogs(services);
+
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, GreetingBot>();
+            services.AddTransient<IBot, DialogBot<MainDialog>>();
 
         }
 
@@ -55,6 +59,11 @@ namespace ChatBot
 
             // Create an instance of the stateService
             services.AddSingleton<BotStateService>();
+        }
+
+        public void ConfigureDialogs(IServiceCollection services)
+        {
+            services.AddSingleton<MainDialog>();
         }
 
 

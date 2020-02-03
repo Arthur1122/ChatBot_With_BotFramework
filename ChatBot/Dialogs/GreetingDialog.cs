@@ -16,7 +16,7 @@ namespace ChatBot.Dialogs
         private readonly BotStateService _botStateService;
         #endregion
 
-        public GreetingDialog(string dialogId, BotStateService botStateService)
+        public GreetingDialog(string dialogId, BotStateService botStateService) : base(dialogId)
         {
             _botStateService = botStateService ?? throw new ArgumentNullException(nameof(botStateService));
 
@@ -32,14 +32,14 @@ namespace ChatBot.Dialogs
                 FinalStepAsync
             };
 
-            // Add named dialogs
+            
 
-            AddDialog(new WaterfallDialog($"{nameof(GreetingDialog)}.mainflow", waterfallSteps));
+            // Add Named Dialogs
+            AddDialog(new WaterfallDialog($"{nameof(GreetingDialog)}.mainFlow", waterfallSteps));
             AddDialog(new TextPrompt($"{nameof(GreetingDialog)}.name"));
 
             // Set the starting Dialog
-
-            InitialDialogId = $"{nameof(GreetingDialog)}.mainflow";
+            InitialDialogId = $"{nameof(GreetingDialog)}.mainFlow";
         }
 
         private async Task<DialogTurnResult> InitializeStepAsync(WaterfallStepContext stepContext,CancellationToken cancellationToken)

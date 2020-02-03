@@ -41,8 +41,8 @@ namespace ChatBot.Bots
         {
             _logger.LogInformation("Running dialog with Message Activity");
 
-            // Run the Dialog with the new Message Activity
-            _dialog.Run(turnContext, _botStateService.DialogStateAccessor, cancellationToken);
+            // Run the Dialog with the new message Activity.
+            await _dialog.Run(turnContext, _botStateService.DialogStateAccessor, cancellationToken);
         }
     }
 }
