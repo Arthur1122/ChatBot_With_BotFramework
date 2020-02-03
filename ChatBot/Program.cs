@@ -5,6 +5,8 @@
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+
 
 namespace ChatBot
 {
@@ -17,6 +19,11 @@ namespace ChatBot
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+             .ConfigureLogging((logging) =>
+             {
+                 logging.AddDebug();
+                 logging.AddConsole();
+             })
+            .UseStartup<Startup>();
     }
 }

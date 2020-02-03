@@ -46,6 +46,7 @@ namespace ChatBot
             // Create the storage We'll be using for user and conversation state. (Memory is greate for testing pupuses)
             services.AddSingleton<IStorage, MemoryStorage>();
 
+
             // Create user state
             services.AddSingleton<UserState>();
 
